@@ -1,30 +1,26 @@
 import './App.css'
-import { addNote, setInput } from './context/Action';
-import { useStore } from './context/hooks'
-import {useRef} from 'react'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {useState} from 'react'
+import {Home} from './pages/Home/Home'
+import {Register} from './pages/Register/Register'
+import {Login} from './pages/Login/Login'
 function App() {
-  const inputRef = useRef()
-  const [state, dispatch] = useStore()
-  console.log(state);
-  console.log(inputRef);
+  const [auth,setAuth]=useState(false)
   return (
     <div>
-      <input
-        value={state.todoInput}
-        ref={inputRef}
-        placeholder='Enter a note'
-        onChange={e => dispatch(setInput(e.target.value))}
-      >
-      </input>
-      <button onClick={() => {
-        dispatch(addNote(state.todoInput))
-        inputRef.current.focus()
-        }}>ADD</button>
-      <ul>
-        {state.todos.map(todo => {
-          return <li key={todo}>{todo}</li>
-        })}
-      </ul>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/'>
+            {auth? <Home/>: <Redirect to='register'/>}
+          </Route>
+          <Route path='/register'>
+            {!auth? <Register/>: <Redirect to='/'/>}
+          </Route>
+          <Route path='/login'>
+            {!auth? <Login/>:<Redirect to='/'/>}
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   )
 }
