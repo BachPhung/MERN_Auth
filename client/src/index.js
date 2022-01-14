@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider } from './ThemeContext'
+import {Provider} from './context/Provider'
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
+    <Provider>
       <App />
-    </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
