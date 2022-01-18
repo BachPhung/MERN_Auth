@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 authRoute.post('/register', async (req, res) => {
     const newUser = new User({
         username: req.body.username,
-        password: CryptoJS.AES.encrypt(req.body.password, process.env.SECRET_KEY).toString()
+        password: CryptoJS.AES.encrypt(req.body.password, process.env.SECRET_KEY).toString(),
     })
     try {
         const user = await newUser.save();
@@ -17,22 +17,20 @@ authRoute.post('/register', async (req, res) => {
     }
 })
 
-
-
 //LOGIN
 authRoute.post('/login', async(req, res)=>{
     try{
         const user = await User.findOne({username: req.body.username})
-        !user && res.json(401).json('Wrong username or password')
+        !user && res.status(401).json('Wrong username or password')
         const bytes = CryptoJS.AES.decrypt(user.password,process.env.SECRET_KEY)
         const originalPassword = bytes.toString(CryptoJS.enc.Utf8)
-        originalPassword !== req.body.password && res.json(401).json('Wrong username or password')
+        originalPassword !== req.body.password && res.status(401).json('Wrong username or password')
         const {password,...info} = user._doc
         const accessToken = jwt.sign({id: user._id},process.env.SECRET_KEY,{expiresIn:'2d'})
         res.status(200).json({...info,accessToken})
     }
     catch(err){
-        res.status(500).json
+        res.status(500).json(err)
     }
 })
 

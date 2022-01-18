@@ -4,12 +4,14 @@ import {useState} from 'react'
 import {Home} from './pages/Home/Home'
 import {Register} from './pages/Register/Register'
 import {Login} from './pages/Login/Login'
-import {useContext} from 'react'
+import {useContext, useEffect} from 'react'
 import {Context} from './authContext/authContext'
 function App() {
-  const [auth,setAuth]=useState(false)
-  const {user} = useContext(Context)
-  console.log(user);
+  const [auth,setAuth]=useState(false);
+  const {user} = useContext(Context);
+  useEffect(() => {
+    user ===null ? setAuth(false) : setAuth(true)
+  }, [user,auth])
   return (
     <div>
       <BrowserRouter>

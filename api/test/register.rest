@@ -1,3 +1,7 @@
-GET http://localhost:8800/api/user/find/61e0dbacd494227451e03820
+POST http://localhost:8800/api/auth/register
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZTBkYmFjZDQ5NDIyNzQ1MWUwMzgyMCIsImlhdCI6MTY0MjE3MDEzNywiZXhwIjoxNjQyMzQyOTM3fQ.2r02BD-L9Z6hCwtWA9RwPpMQzyXIPmOXAXRgIBS6xkM
+
+{   
+    "username":"quangbach",
+    "password":"123456e789"
+}

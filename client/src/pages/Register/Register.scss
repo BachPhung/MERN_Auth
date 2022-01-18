@@ -26,6 +26,12 @@
                 align-items: center;
                 border: none;
                 flex-direction: column;
+                div{
+                    display: none;
+                }
+                .show{
+                    display: block !important;
+                }
                 button{
                     cursor: pointer;
                     width: 100px;
