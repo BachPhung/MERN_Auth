@@ -3,22 +3,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
     .form{
-        height: 300px;
         width: 300px;
-        background-color: rgb(45, 45, 100);
-        display: flex;
-        flex-direction: column;
-        div{
-            p{
-                color: white;
+        height: 500px;
+        background-color: #24A19C;
+        .wrapper{
+            .field{
+                margin: 20px 0;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                input{
+                    display: flex;
+                    align-items: center;
+                    height: 30px;
+                }
+            }
+            .btn{
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                flex-direction: column;
+                button{
+                    cursor: pointer;
+                    width: 100px;
+                }
             }
         }
-        .btn{
-            justify-content: center;
-            align-items: center;
-        }
-
     }
+    
 }
