@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 //REGISTER
 authRoute.post('/register', async (req, res) => {
     const newUser = new User({
-        username: req.body.username,
+        username: req.body.username.toString(),
         password: CryptoJS.AES.encrypt(req.body.password, process.env.SECRET_KEY).toString(),
     })
     try {

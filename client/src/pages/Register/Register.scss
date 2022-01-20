@@ -1,43 +1,74 @@
 .register{
     height: 100vh;
+    width: 100%;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    .form{
-        width: 300px;
+    background: url("https://i.pinimg.com/originals/7f/80/64/7f8064e802b49be8a2e391dc0aedead4.jpg") no-repeat center
+        center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    .wrapper{
+        width: 425px;
         height: 500px;
-        background-color: #24A19C;
-        .wrapper{
-            .field{
-                margin: 20px 0;
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                input{
-                    display: flex;
-                    align-items: center;
-                    height: 30px;
-                }
+        background-color: rgba(10, 26, 26, 0.5);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .form {
+            h1{
+                color: white;
             }
-            .btn{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            input{
+                padding-left: 10px;
+                width: 200px;
+                height: 40px;
                 margin-top: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                border-radius: 5px;
                 border: none;
-                flex-direction: column;
-                div{
+            }
+            button{
+                margin-top: 20px;
+                width: 150px;
+                height: 35px;
+                border: none;
+                border-radius: 5px;
+                color: white;
+                background-color: #5800FF;
+                cursor: pointer;
+            }
+            .message{    
+                margin: 10px 0;
+                .hide{
                     display: none;
                 }
-                .show{
+                .show-success{
                     display: block !important;
+                    color: greenyellow !important;
                 }
-                button{
-                    cursor: pointer;
-                    width: 100px;
+                .show-fail{
+                    display: block !important;
+                    color:red !important;
+                }
+            }
+            .move-login{
+                margin-top: 18px;
+                color:white;
+                font-size: 12px;
+                .link{
+                    font-size: 14px;
+                    color: #5800FF;
+                    text-decoration: none;
                 }
             }
         }
     }
-    
 }

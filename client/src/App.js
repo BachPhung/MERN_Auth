@@ -1,10 +1,9 @@
 import './App.css'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
-import {useState} from 'react'
 import {Home} from './pages/Home/Home'
 import {Register} from './pages/Register/Register'
 import {Login} from './pages/Login/Login'
-import {useContext, useEffect} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {Context} from './authContext/authContext'
 function App() {
   const [auth,setAuth]=useState(false);
@@ -17,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path='/'>
-            {auth? <Home/>: <Redirect to='register'/>}
+            {auth? <Home/>: <Redirect to='/login'/>}
           </Route>
           <Route path='/register'>
             {!auth? <Register/>: <Redirect to='/'/>}

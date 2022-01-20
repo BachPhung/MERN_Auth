@@ -4,12 +4,14 @@ import axios from 'axios'
 import { useState } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { VscError } from 'react-icons/vsc'
+
 export const Register = () => {
     const history = useHistory()
     const [username, setUserName] = useState('')
     const [password, setPassWord] = useState('')
     const [status, setStatus] = useState(false)
     const [submit, setSubmited] = useState(false)
+
     const handleRegister = async (e) => {
         e.preventDefault()
         try {
@@ -27,40 +29,34 @@ export const Register = () => {
     }
     return (
         <div className='register'>
-            <form className='form'>
-                <div className='wrapper'>
-                    <div className='field'>
-                        <p>Username:</p>
-                        <input
-                            placeholder='Enter your username'
-                            value={username}
-                            type='text'
-                            name='username'
-                            autoComplete="on"
-                            onChange={e => setUserName(e.target.value)}
-                        ></input>
-                    </div>
-                    <div className='field'>
-                        <p>Password:</p>
-                        <input
-                            placeholder='Enter your Password'
-                            value={password}
-                            name='password'
-                            type='password'
-                            autoComplete="on"
-                            onChange={e => setPassWord(e.target.value)}
-                        ></input>
-                    </div>
-                    <div className='btn'>
-                        <button onClick={handleRegister}>Register</button>
+            <div className='wrapper'>
+                <div className='form'>
+                    <h1>Register</h1>
+                    <input
+                        type='text'
+                        value={username}
+                        placeholder='Username'
+                        onChange={e => setUserName(e.target.value)}
+                    ></input>
+                    <input
+                        type='password'
+                        value={password}
+                        placeholder='Password'
+                        onChange={e => setPassWord(e.target.value)}
+                    ></input>
+                    <button onClick={handleRegister}>Start</button>
+                    <div className='message'>
                         {status
-                            ? <div className={submit ? 'show' : ''} >Register Sucess<AiOutlineCheck /></div>
-                            : <div className={submit ? 'show' : ''}>Register Fail <VscError /></div>
+                            ? <div className={submit ? 'show-success' : 'hide'} >Register Sucess<AiOutlineCheck /></div>
+                            : <div className={submit ? 'show-fail' : 'hide'}>Register Fail <VscError /></div>
                         }
-                        <Link to='/login'><button>Sign In</button></Link>
+                    </div>
+                    <div className='move-login'>
+                        <i>In case you have had an account</i><Link to='/login' className='link'><strong> Sign in now</strong></Link>
                     </div>
                 </div>
-            </form>
+
+            </div>
         </div>
     )
 }
