@@ -8,6 +8,7 @@ import {Context} from './authContext/authContext'
 function App() {
   const [auth,setAuth]=useState(false);
   const {user} = useContext(Context);
+  
   useEffect(() => {
     user ===null ? setAuth(false) : setAuth(true)
   }, [user,auth])

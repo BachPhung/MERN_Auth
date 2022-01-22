@@ -5,12 +5,24 @@ import { Context } from '../../authContext/authContext'
 import { loginStart, loginSuccess, loginFailure } from '../../authContext/Action'
 import { BsGoogle, BsGithub } from 'react-icons/bs'
 import { FaFacebookF } from 'react-icons/fa'
+import { authentication } from '../../firebase-config'
+import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
 import axios from 'axios'
 export const Login = () => {
 
     const { isFetching, dispatch } = useContext(Context)
     const [username, setUserName] = useState('')
     const [password, setPassWord] = useState('')
+    const signInWithGoogle = ()=>{
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(authentication,provider)
+        .then((re)=>{
+            console.log(re);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
     const handleLogin = async (e) => {
         e.preventDefault()
         dispatch(loginStart());
@@ -40,7 +52,9 @@ export const Login = () => {
                             <div className='div-icon'>
                                 <BsGoogle className='icon' />
                             </div>
-                            <div className='text'>Google</div>
+                            <div className='text' onClick={signInWithGoogle}>
+                                Google
+                            </div>
                         </div>
                         <div className='github btn'>
                             <div className='div-icon'>
