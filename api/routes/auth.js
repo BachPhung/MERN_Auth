@@ -35,7 +35,7 @@ authRoute.post('/login', async(req, res)=>{
     }
 })
 
-authRoute.post('/login/google',async(req,res)=>{
+authRoute.post('/login/social-media',async(req,res)=>{
     try{
         const user = await User.findOrCreate({username:req.body.username},{password:req.body.password});
         const {password,...info} = user.doc

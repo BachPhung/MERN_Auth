@@ -6,7 +6,7 @@ import { loginStart, loginSuccess, loginFailure } from '../../authContext/Action
 import { BsGoogle, BsGithub } from 'react-icons/bs'
 import { FaFacebookF } from 'react-icons/fa'
 import { authentication } from '../../firebase-config'
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider } from 'firebase/auth'
 import axios from 'axios'
 export const Login = () => {
 
@@ -17,17 +17,37 @@ export const Login = () => {
         e.preventDefault()
         const provider = new GoogleAuthProvider();
         const res = await signInWithPopup(authentication, provider)
-        const data = res.user;
+        const data = res.user
         dispatch(loginStart())
         try{
-            const response = await axios.post('http://localhost:8800/api/auth/login/google',{username:data.email,password:data.uid})
+            const response = await axios.post('http://localhost:8800/api/auth/login/social-media',{username:data.email,password:data.uid})
             dispatch(loginSuccess(response.data))
-            console.log(res.data);
+            console.log(res.data)
             localStorage.setItem("user",response.data.accessToken)
         }
         catch(err){
             dispatch(loginFailure())
         }
+    }
+    const signInWithFacebook = async (e) => {
+        e.preventDefault()
+        const provider  = new FacebookAuthProvider();
+        const res = await signInWithPopup(authentication ,provider);
+        const data = res.user
+        dispatch(loginStart())
+        try{
+            const response = await axios.post('http://localhost:8800/api/auth/login/social-media',{username:data.displayName,password:data.uid})
+            dispatch(loginSuccess(response.data))
+            console.log(res.data)
+            localStorage.setItem("user",response.data.accessToken)
+        }
+        catch(err){
+            dispatch(loginFailure())
+        }
+        console.log(res);
+    }
+    const signInWithGithub = async (e) => {
+        e.preventDefault()
     }
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -53,7 +73,7 @@ export const Login = () => {
                             <div className='div-icon'>
                                 <FaFacebookF className='icon' />
                             </div>
-                            <div className='text'>Facebook</div>
+                            <div className='text' onClick={signInWithFacebook}>Facebook</div>
                         </div>
                         <div className='google btn'>
                             <div className='div-icon'>
@@ -67,7 +87,7 @@ export const Login = () => {
                             <div className='div-icon'>
                                 <BsGithub className='icon' />
                             </div>
-                            <div className='text'>Github</div>
+                            <div className='text' onClick={signInWithGithub}>Github</div>
                         </div>
                     </div>
                 </div>
