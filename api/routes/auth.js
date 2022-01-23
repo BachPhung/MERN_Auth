@@ -2,6 +2,7 @@ const authRoute = require('express').Router()
 const User = require('../models/User')
 const CryptoJS = require('crypto-js')
 const jwt = require('jsonwebtoken')
+const passport = require('passport')
 //REGISTER
 authRoute.post('/register', async (req, res) => {
     const newUser = new User({
@@ -30,6 +31,17 @@ authRoute.post('/login', async(req, res)=>{
         res.status(200).json({...info,accessToken})
     }
     catch(err){
+        res.status(500).json(err)
+    }
+})
+
+authRoute.post('/login/google',async(req,res)=>{
+    try{
+        const user = await User.findOrCreate({username:req.body.username},{password:req.body.password});
+        const {password,...info} = user.doc
+        const accessToken = jwt.sign({id: user._id},process.env.SECRET_KEY,{expiresIn:'2d'})
+        res.status(200).json({...info._doc,accessToken})
+    }catch(err){
         res.status(500).json(err)
     }
 })

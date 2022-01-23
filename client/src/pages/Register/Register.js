@@ -30,18 +30,20 @@ export const Register = () => {
     return (
         <div className='register'>
             <div className='wrapper'>
-                <div className='form'>
+                <form className='form'>
                     <h1>Register</h1>
                     <input
                         type='text'
                         value={username}
                         placeholder='Username'
                         onChange={e => setUserName(e.target.value)}
+                        autoComplete='on'
                     ></input>
                     <input
                         type='password'
                         value={password}
                         placeholder='Password'
+                        autoComplete='on'
                         onChange={e => setPassWord(e.target.value)}
                     ></input>
                     <button onClick={handleRegister}>Start</button>
@@ -54,8 +56,7 @@ export const Register = () => {
                     <div className='move-login'>
                         <i>In case you have had an account</i><Link to='/login' className='link'><strong> Sign in now</strong></Link>
                     </div>
-                </div>
-
+                </form>
             </div>
         </div>
     )

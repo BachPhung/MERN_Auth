@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
+const findOrCreate = require('mongoose-findorcreate')
 const userSchema = mongoose.Schema({
     username:{
         type: String,
@@ -16,4 +17,5 @@ const userSchema = mongoose.Schema({
     }
 },{timestamps:true})
 userSchema.plugin(uniqueValidator)
+userSchema.plugin(findOrCreate)
 module.exports = mongoose.model('User',userSchema)

@@ -1,7 +1,7 @@
-POST http://localhost:8800/api/auth/register
+POST http://localhost:8800/api/auth/login/google
 Content-Type: application/json
 
 {   
     "username":"quangbach",
-    "password":"123456e789"
+    "password":"heehe"
 }
