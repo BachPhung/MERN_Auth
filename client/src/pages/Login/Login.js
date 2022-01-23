@@ -48,6 +48,18 @@ export const Login = () => {
     }
     const signInWithGithub = async (e) => {
         e.preventDefault()
+        const provider = new GithubAuthProvider()
+        const res = await signInWithPopup(authentication,provider)
+        const data = res.user;
+        dispatch(loginStart())
+        try{
+            const response = await axios.post('http://localhost:8800/api/auth/login/social-media',{username:data.email,password:data.uid})
+            dispatch(loginSuccess(response.data))
+            console.log(response.data)
+            localStorage.setItem("user",response.data.accessToken)
+        }catch(err){
+            console.log(err);
+        }
     }
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -65,7 +77,6 @@ export const Login = () => {
     return (
         <div className='login'>
             <div className='wrapper'>
-
                 <div className='left'>
                     <div className='loginButtons'>
                         <h1>Methods</h1>
